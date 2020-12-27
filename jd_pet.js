@@ -1,6 +1,6 @@
 /*
 东东萌宠 更新地址： https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_pet.js
-更新时间：2020-11-30
+更新时间：2020-12-26
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 
@@ -30,13 +30,9 @@ let cookiesArr = [], cookie = '', jdPetShareArr = [], isBox = false, notify, new
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
 let shareCodes = [ // IOS本地脚本用户这个列表填入你要助力的好友的shareCode
    //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'MTAxODc2NTEzNTAwMDAwMDAzMDM0MjUzNw==@MTAxODcxOTI2NTAwMDAwMDAzMDMyMTA5Nw==@MTAxODc2NTEzMjAwMDAwMDAxMjYzNjY4Mw==@MTAxODc2NTEzMDAwMDAwMDAyNjc4NDIwOQ==',
+  'MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ==@MTAxODcxOTI2NTAwMDAwMDAxOTQ3MjkzMw==',
   //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'MTAxODc2NTE0NzAwMDAwMDAxODI2MjM0NQ==@MTAxODcxOTI2NTAwMDAwMDAzMDMyMTA5Nw==@MTAxODc2NTEzMjAwMDAwMDAxMjYzNjY4Mw==@MTAxODc2NTEzMDAwMDAwMDAyNjc4NDIwOQ==',
-   //账号三的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'MTAxODc2NTE0NzAwMDAwMDAxODI2MjM0NQ==@MTAxODc2NTEzNTAwMDAwMDAzMDM0MjUzNw==@MTAxODc2NTEzMjAwMDAwMDAxMjYzNjY4Mw==@MTAxODc2NTEzMDAwMDAwMDAyNjc4NDIwOQ==',
-  //账号四的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'MTAxODc2NTE0NzAwMDAwMDAxODI2MjM0NQ==@MTAxODc2NTEzNTAwMDAwMDAzMDM0MjUzNw==@MTAxODcxOTI2NTAwMDAwMDAzMDMyMTA5Nw==@MTAxODc2NTEzMjAwMDAwMDAxMjYzNjY4Mw==',
+  'MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODcxOTI2NTAwMDAwMDAyNjA4ODQyMQ==@MTAxODc2NTEzOTAwMDAwMDAyNzE2MDY2NQ==@MTE1NDUyMjEwMDAwMDAwNDI0MDM2MDc=',
 ]
 let message = '', subTitle = '', option = {};
 let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
@@ -63,7 +59,7 @@ let randomCount = $.isNode() ? 20 : 5;
 
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
-         }
+        }
         continue
       }
       message = '';
@@ -94,7 +90,7 @@ async function jdPet() {
     }
     if (!$.petInfo.goodsInfo) {
       $.msg($.name, '', `【提示】京东账号${$.index}${$.nickName}\n暂未选购新的商品`, { "open-url": "openapp.jdmoble://" });
-      await notify.sendNotify(`${$.name} - ${$.index} - ${$.nickName}`, `【提示】京东账号${$.index}${$.nickName}\n暂未选购新的商品`);
+      if ($.isNode()) await notify.sendNotify(`${$.name} - ${$.index} - ${$.nickName}`, `【提示】京东账号${$.index}${$.nickName}\n暂未选购新的商品`);
       return
     }
     goodsUrl = $.petInfo.goodsInfo && $.petInfo.goodsInfo.goodsUrl;
