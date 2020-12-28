@@ -7,7 +7,7 @@ Github: https://github.com/dompling
 
 ===================
 特别说明：
-1.获取多个京东cookie文件，不和野比大佬的文件冲突。暂不支持野比大佬脚本签到。
+1.获取多个京东cookie的脚本，不和NobyDa的京东cookie冲突。
 2.若是要使用京东多合一签到，请使用修改版地址：https://raw.githubusercontent.com/dompling/Script/master/jd/JD_extra.js
 ===================
 ===================
