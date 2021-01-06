@@ -25,7 +25,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
-const randomCount = 0; //const randomCount = $.isNode() ? 20 : 5;
+const randomCount = 0;//const randomCount = $.isNode() ? 20 : 5;
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 if ($.isNode()) {
@@ -34,7 +34,7 @@ if ($.isNode()) {
   })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-   let cookiesData = $.getdata('CookiesJD') || "[]";
+  let cookiesData = $.getdata('CookiesJD') || "[]";
   cookiesData = jsonParse(cookiesData);
   cookiesArr = cookiesData.map(item => item.cookie);
   cookiesArr.reverse();
@@ -43,8 +43,7 @@ if ($.isNode()) {
   cookiesArr = cookiesArr.filter(item => item !== "" && item !== null && item !== undefined);
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-const inviteCodes = ['T012Z3_rmZ-VI8dsCjVUnoaW5kRrbA','T0225KkcRx0c81zXc0-gxaYPIQCjVUnoaW5kRrbA','T0225KkcRx8epgDUJEzxlfUDcgCjVUnoaW5kRrbA','T0225KkcRU8Y9lbecUzykvEDdgCjVUnoaW5kRrbA'];
-!(async () => {
+const inviteCodes = ['T012Z3_rmZ-VI8dsCjVUnoaW5kRrbA','T0225KkcRx0c81zXc0-gxaYPIQCjVUnoaW5kRrbA','T0225KkcRx8epgDUJEzxlfUDcgCjVUnoaW5kRrbA','T0225KkcRU8Y9lbecUzykvEDdgCjVUnoaW5kRrbA'];!(async () => {
   await requireConfig();
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {"open-url": "https://bean.m.jd.com/"});
@@ -265,7 +264,7 @@ function readShareCode() {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取${randomCount}个码放到您固定的互助码后面`)
+            console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
             data = JSON.parse(data);
           }
         }
