@@ -1,6 +1,6 @@
 /**
 宠汪汪邀请助力与赛跑助力脚本，感谢github@Zero-S1提供帮助
-更新时间：2021-1-6（宠汪汪助力更新Token的配置正则表达式已改）
+更新时间：2021-1-7（宠汪汪助力更新Token的配置正则表达式已改）
 
 token时效很短，几个小时就失效了,闲麻烦的放弃就行
 每天拿到token后，可一次性运行完毕即可。
@@ -290,6 +290,7 @@ function enterRoom(invitePin) {
   return new Promise(resolve => {
     headers.Cookie = cookie;
     headers.LKYLToken = $.LKYLToken;
+    headers['Content-Type'] = "application/json";
     const options = {
       url: `${JD_BASE_API}/enterRoom/h5?reqSource=weapp&invitePin=${encodeURI(invitePin)}&inviteSource=task_invite&shareSource=weapp&inviteTimeStamp=${Date.now()}`,
       body: '{}',
@@ -301,8 +302,8 @@ function enterRoom(invitePin) {
           $.log(`${$.name} API请求失败`)
           $.log(JSON.stringify(err))
         } else {
-          data = JSON.parse(data);
           // console.log('进入房间', data)
+          data = JSON.parse(data);
         }
       } catch (e) {
         $.logErr(e, resp)
