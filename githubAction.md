@@ -45,7 +45,9 @@
 | `DREAM_FACTORY_SHARE_CODES` | 京喜工厂互助码 | 非必须 | 填写规则请看[jdDreamFactoryShareCodes.js](https://github.com/lxk0301/jd_scripts/blob/master/jdDreamFactoryShareCodes.js)或见下方[互助码的填写规则](#互助码的填写规则) |
 | `JDZZ_SHARECODES`           | 京东赚赚互助码 | 非必须 | 填写规则和上面类似，或见下方[互助码的填写规则](#互助码的填写规则)                                                                       |
 | `JDJOY_SHARECODES`          | 疯狂的JOY互助码 | 非必须 | 填写规则和上面类似，或见下方[互助码的填写规则](#互助码的填写规则)                                                                       |
-| `JXNCSHARECODES`            | 京喜农场互助码 | 非必须 | 填写规则和上面类似，或见下方[互助码的填写规则](#互助码的填写规则)                                                                       |
+| `BOOKSHOP_SHARECODES`       | 京东书店互助码 | 非必须 | 填写规则和上面类似，或见下方[互助码的填写规则](#互助码的填写规则)                                                                       |
+| `JD_CASH_SHARECODES`        | 签到领现金互助码 | 非必须 | 填写规则和上面类似，或见下方[互助码的填写规则](#互助码的填写规则)                                                                       |
+| `JXNC_SHARECODES`           | 京喜农场互助码 | 非必须 | 填写规则和上面类似，或见下方[互助码的填写规则](#互助码的填写规则)                                                                       |
 
 ##### 控制脚本功能环境变量
 
@@ -73,12 +75,10 @@
 | `UN_BIND_CARD_NUM`           | jd_unbind.js                | 非必须 | 注销京东已开的店铺会员，不是注销京东plus会员，个别店铺无法注销。此参数控制每次运行脚本时注销多少个店铺会员，默认200。                                                                             |
 | `UN_BIND_STOP_CARD`          | jd_unbind.js                | 非必须 | 注销京东已开的店铺会员，不是注销京东plus会员，个别店铺无法注销。遇到此参数设定的会员卡则跳过不注销，多个会员卡之间以`&`分隔，默认值"京东PLUS会员"。                                   |
 | `JDJOY_HELPSELF`             | 疯狂的JOY                   | 非必须 | 疯狂的JOY循环助力，`true`表示循环助力,`false`表示不循环助力，默认不开启循环助力。                                                                                                                                        |
-| `JDJOY_APPLYJDBEAN`          | 疯狂的JOY                   | 非必须 | 疯狂的JOY京豆兑换，目前最小值为500/1000京豆，默认不开启京豆兑换。                                                                                                                                                             |
+| `JDJOY_APPLYJDBEAN`          | 疯狂的JOY                   | 非必须 | 疯狂的JOY京豆兑换，目前最小值为2000京豆(详情请查看活动页面-提现京豆)，默认数字`0`不开启京豆兑换。                                                                                                                                                             |
 | `BUY_JOY_LEVEL`              | 疯狂的JOY                   | 非必须 | 疯狂的JOY自动购买什么等级的JOY                                                                                                                                                                                                               |
 | `MONEY_TREE_SELL_FRUIT`      | 摇钱树是否卖出金果           | 非必须 | 控制摇钱树脚本是否自动卖出金果兑换成金币，`true`卖出，`false`不卖出，默认`false`                                                                                                                                           |
 | `FACTORAY_WANTPRODUCT_NAME`  | 东东工厂心仪商品             | 非必须 | 提供心仪商品名称(请尽量填写完整和别的商品有区分度)，达到条件后兑换，如不提供则会兑换当前所选商品                                                                                                          |
-| `WATCH_ACCEPTBODY`           | 京东看一看(jd_watch.js)脚本  | 非必须 | 抓包`functionId=discAcceptTask`(需40个，每个之间使用@符号隔开)                                                                                                                                                                            |
-| `WATCH_DOBODY`               | 京东看一看(jd_watch.js)脚本  | 非必须 | 抓包`functionId=discDoTask`(需40个，每个之间使用@符号隔开)                                                                                                                                                                                |
 | `JXNCTOKENS`                 | 京喜农场TOKEN               | 非必须 | 每个账号 token 是一个 json，示例：{"farm_jstoken":"749a90f871adsfads8ffda7bf3b1576760","timestamp":"1610165423873","phoneid":"42c7e3dadfadsfdsaac-18f0e4f4a0cf"}，多账单间使用`&`或换行分开。                                    |
 
 ##### 互助码的填写规则
