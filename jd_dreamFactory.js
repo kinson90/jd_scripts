@@ -34,7 +34,11 @@ const randomCount = $.isNode() ? 20 : 5;
 let tuanActiveId = `6S9y4sJUfA2vPQP6TLdVIQ==`;
 const jxOpenUrl = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D`;
 let cookiesArr = [], cookie = '', message = '';
-const inviteCodes = ['V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=@0WtCMPNq7jekehT6d3AbFw==', 'PDPM257r_KuQhil2Y7koNw==', "gB99tYLjvPcEFloDgamoBw==", '-OvElMzqeyeGBWazWYjI1Q==', 'GFwo6PntxDHH95ZRzZ5uAg=='];
+const inviteCodes = ['yiipgtBqYp_urMYMCbz1hg==@-ow4Hf16dTi6nJjyOULebw==@NicJ_AQB0BtXDWyB7CFcDw==@TaaWof7p1BWR9HJwrUm24Q==', 
+                     'ysKjlBr0L5dIJW3iTJ8-kA==@-ow4Hf16dTi6nJjyOULebw==@NicJ_AQB0BtXDWyB7CFcDw==@TaaWof7p1BWR9HJwrUm24Q==', 
+                     'ysKjlBr0L5dIJW3iTJ8-kA==@yiipgtBqYp_urMYMCbz1hg==@NicJ_AQB0BtXDWyB7CFcDw==@TaaWof7p1BWR9HJwrUm24Q==', 
+                     'ysKjlBr0L5dIJW3iTJ8-kA==@yiipgtBqYp_urMYMCbz1hg==@-ow4Hf16dTi6nJjyOULebw==@TaaWof7p1BWR9HJwrUm24Q=='
+                    ];
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -984,7 +988,7 @@ function QueryTuan(activeId, tuanId) {
 function CreateTuan() {
   return new Promise((resolve) => {
     const options = {
-      'url': `https://m.jingxi.com/dreamfactory/tuan/CreateTuan?activeId=${escape(tuanActiveId)}&isOpenApp=2&_time=${Date.now()}&_=${Date.now()}&sceneval=2&g_login_type=1`,
+      'url': `https://m.jingxi.com/dreamfactory/tuan/CreateTuan?activeId=${escape(tuanActiveId)}&isOpenApp=1&_time=${Date.now()}&_=${Date.now()}&sceneval=2&g_login_type=1&_stk=_time,activeId,isOpenApp`,
       "headers": {
         "Accept": "*/*",
         "Accept-Encoding": "gzip, deflate, br",
@@ -1300,7 +1304,7 @@ async function showMsg() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: `http://api.turinglabs.net/api/v1/jd/jxfactory/read/${randomCount}/`}, (err, resp, data) => {
+    $.get({url: `http://api.turinglabs.net/api/v1/jd/jxfactory/read/${randomCount}/`, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
