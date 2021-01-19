@@ -27,7 +27,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
-const randomCount = 0;//const randomCount = $.isNode() ? 20 : 5;
+const randomCount = $.isNode() ? 20 : 5;
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 if ($.isNode()) {
@@ -46,10 +46,10 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const inviteCodes = [
-  'cgxZdTXtI7nf7AbJW1D9viH16Ij4VW_9m1ylr1UyNBbIO9WGO1Z6JNEPjR8@cgxZdTXtI7vduVrKDFOs7nDUmvBe5qKKZIJX5cvamziNsX-ND-HrZVSL4vk@cgxZdTXtIevb6QzAWVOv6WEWDsK5_rU7v5cifFwk67Sc_3OywGxTgl5CIxM',
-  'cgxZ9uMa_TtWPJ1yREnKhU2W8hd0OHC1OGzE@cgxZdTXtI7vduVrKDFOs7nDUmvBe5qKKZIJX5cvamziNsX-ND-HrZVSL4vk@cgxZdTXtIevb6QzAWVOv6WEWDsK5_rU7v5cifFwk67Sc_3OywGxTgl5CIxM',
-  'cgxZ9uMa_TtWPJ1yREnKhU2W8hd0OHC1OGzE@cgxZdTXtI7nf7AbJW1D9viH16Ij4VW_9m1ylr1UyNBbIO9WGO1Z6JNEPjR8@cgxZdTXtIevb6QzAWVOv6WEWDsK5_rU7v5cifFwk67Sc_3OywGxTgl5CIxM',
-  'cgxZ9uMa_TtWPJ1yREnKhU2W8hd0OHC1OGzE@cgxZdTXtI7nf7AbJW1D9viH16Ij4VW_9m1ylr1UyNBbIO9WGO1Z6JNEPjR8@cgxZdTXtI7vduVrKDFOs7nDUmvBe5qKKZIJX5cvamziNsX-ND-HrZVSL4vk'
+  'cgxZdTXtI7nf7AbJW1D9viH16Ij4VW_9m1ylr1UyNBbIO9WGO1Z6JNEPjR8@cgxZdTXtI7vduVrKDFOs7nDUmvBe5qKKZIJX5cvamziNsX-ND-HrZVSL4vk@cgxZdTXtIevb6QzAWVOv6WEWDsK5_rU7v5cifFwk67Sc_3OywGxTgl5CIxM@cgxZLmKFIbra6Q_NCgHGr6mQa-8Xm42fuzleKp258MyzI_hDsg',
+  'cgxZ9uMa_TtWPJ1yREnKhU2W8hd0OHC1OGzE@cgxZdTXtI7vduVrKDFOs7nDUmvBe5qKKZIJX5cvamziNsX-ND-HrZVSL4vk@cgxZdTXtIevb6QzAWVOv6WEWDsK5_rU7v5cifFwk67Sc_3OywGxTgl5CIxM@cgxZLmKFIbra6Q_NCgHGr6mQa-8Xm42fuzleKp258MyzI_hDs',
+  'cgxZ9uMa_TtWPJ1yREnKhU2W8hd0OHC1OGzE@cgxZdTXtI7nf7AbJW1D9viH16Ij4VW_9m1ylr1UyNBbIO9WGO1Z6JNEPjR8@cgxZdTXtIevb6QzAWVOv6WEWDsK5_rU7v5cifFwk67Sc_3OywGxTgl5CIxM@cgxZLmKFIbra6Q_NCgHGr6mQa-8Xm42fuzleKp258MyzI_hDs',
+  'cgxZ9uMa_TtWPJ1yREnKhU2W8hd0OHC1OGzE@cgxZdTXtI7nf7AbJW1D9viH16Ij4VW_9m1ylr1UyNBbIO9WGO1Z6JNEPjR8@cgxZdTXtI7vduVrKDFOs7nDUmvBe5qKKZIJX5cvamziNsX-ND-HrZVSL4vk@ccgxZLmKFIbra6Q_NCgHGr6mQa-8Xm42fuzleKp258MyzI_hDsg'
 ];
 !(async () => {
   await requireConfig();
@@ -87,16 +87,20 @@ const inviteCodes = [
       $.done();
     })
 async function jdNian() {
-  await getHomeData()
-  if(!$.secretp) return
-  await map()
-  await queryMaterials()
-  await getTaskList()
-  await $.wait(1000)
-  await doTask()
-  await helpFriends()
-  await getHomeData(true)
-  await showMsg()
+  try {
+    await getHomeData()
+    if(!$.secretp) return
+    await map()
+    await queryMaterials()
+    await getTaskList()
+    await $.wait(1000)
+    await doTask()
+    await helpFriends()
+    await getHomeData(true)
+    await showMsg()
+  } catch (e) {
+    $.logErr(e)
+  }
 }
 function encode(data, aa, extraData) {
   const temp = {
@@ -112,6 +116,7 @@ function getRnd() {
 function showMsg() {
   return new Promise(resolve => {
     console.log('任务已做完！\n如有未完成的任务，请多执行几次。注：目前入会任务不会做')
+    console.log('如出现taskVos错误的，请更新USER_AGENTS.js或使用自定义UA功能')
     if (!jdNotify) {
       $.msg($.name, '', `${message}`);
     } else {
@@ -351,22 +356,24 @@ function collectScore(taskId,itemId,actionType=null,inviteId=null,shopSign=null)
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            if (data.data.bizCode === 0) {
-              if(data.data.result.score)
-                console.log(`任务完成，获得${data.data.result.score}爆竹🧨`)
-              else if(data.data.result.maxAssistTimes) {
-                console.log(`助力好友成功`)
-              } else{
-                console.log(`任务上报成功`)
-                await $.wait(10*1000)
-                if(data.data.result.taskToken){
-                  await doTask2(data.data.result.taskToken)
+            if (data.code === 0) {
+              if (data.data && data.data.bizCode === 0) {
+                if(data.data.result.score)
+                  console.log(`任务完成，获得${data.data.result.score}爆竹🧨`)
+                else if(data.data.result.maxAssistTimes) {
+                  console.log(`助力好友成功`)
+                } else{
+                  console.log(`任务上报成功`)
+                  await $.wait(10*1000)
+                  if(data.data.result.taskToken){
+                    await doTask2(data.data.result.taskToken)
+                  }
                 }
+                // $.userInfo = data.data.result.userInfo;
               }
-              // $.userInfo = data.data.result.userInfo;
-            }
-            else{
-              console.log(data.data.bizMsg)
+              else{
+                console.log(data.data.bizMsg)
+              }
             }
           }
         }
@@ -480,7 +487,7 @@ function getFriendData(inviteId) {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
-          if (data && data.data['bizCode'] === 0) {
+          if (data.data && data.data['bizCode'] === 0) {
             $.itemId = data.data.result.homeMainInfo.guestInfo.itemId
             await collectScore('2',$.itemId,null,inviteId)
           }
