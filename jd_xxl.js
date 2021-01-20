@@ -34,8 +34,10 @@ let ACT_ID = 'A_112790_R_1_D_20201028'
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 let inviteCodes = [
-  '',
-  '',
+  '2845317@2845449@2845582',
+  '2519805@2845449@2845582',
+  '2519805@2845317@2845582',
+  '2519805@2845317@2845449'
 ]
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
